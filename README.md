@@ -1,6 +1,8 @@
-# chat-bot
+# React + Vite
 
-The data and intent.json is very limmited, you can work more on it to have a greater response and more customizations.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-<h3>First run the model.py file</h3>
-<h3>Then run the chatbot.py file</h3>
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
