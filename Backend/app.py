@@ -5,8 +5,7 @@ from textblob import TextBlob
 import pyjokes
 
 app = Flask(__name__)
-CORS(app)
-
+CORS(app)  # Allow all origins by default
 
 tokenizer = T5Tokenizer.from_pretrained("google/flan-t5-xl")
 model = T5ForConditionalGeneration.from_pretrained("google/flan-t5-xl")
@@ -17,12 +16,10 @@ def generate_response(input_text):
     response = tokenizer.decode(output_ids[0], skip_special_tokens=True)
     return response
 
-@app.route('/chatbot', methods=['POST'])
+@app.route('/Chatbot', methods=['POST'])
 def chatbot():
-   
     data = request.json
     user_input = data['message']
-
     
     bot_response = generate_response(user_input)
 
@@ -36,15 +33,9 @@ def chatbot():
     else:
         sentiment_label = "neutral"
 
-    joke = ""
-    if sentiment_score > 0.5:
-        joke = pyjokes.get_joke(language='en', category='neutral')
-    elif sentiment_score < -0.5:
-        joke = pyjokes.get_joke(language='en', category='neutral')
-    else:
-        joke = pyjokes.get_joke(language='en', category='neutral')
+    joke = pyjokes.get_joke(language='en', category='neutral')
 
-    return jsonify({'message': bot_response, 'sentiment': sentiment_label, 'joke': joke})
+    return jsonify({'response': bot_response, 'sentiment': sentiment_label, 'joke': joke})
 
 if __name__ == '__main__':
     app.run(debug=True)
